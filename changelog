@@ -3,6 +3,7 @@ swd-ros-controllers (4.1.0) unstable; urgency=medium
   * Fix the apt-key deprecation error
   * Change some log level messages
   * Support two levels of SLS
+    NOTA : swd_ros_controllers::SafetyFunctions has been changed. There is no compatibility with older versions.
   * Update README.md : fix sources.list + add SWD-125 product
   * Add depend.sh
 
