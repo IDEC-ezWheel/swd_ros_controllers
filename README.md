@@ -64,7 +64,7 @@ In the following instructions, replace `<rosdistro>` with the name of your ROS d
 source /opt/ros/<rosdistro>/setup.bash
 mkdir -p ~/ros_ws/src/
 cd ~/ros_ws/src/
-git clone https://github.com/ezWheelSAS/swd_ros_controllers.git
+git clone https://github.com/IDEC-ezWheel/swd_ros_controllers.git
 cd ..
 catkin_make install
 source ~/ros_ws/install/setup.bash
@@ -283,7 +283,7 @@ The functions SDIp and SDIn enable the motor movement only in the corresponding 
 
 ## Support
 
-For any questions, [open a GitHub issue](https://github.com/ezWheelSAS/swd_ros_controllers/issues).
+For any questions, [open a GitHub issue](https://github.com/IDEC-ezWheel/swd_ros_controllers/issues).
 
 ## About ez-Wheel®
 
