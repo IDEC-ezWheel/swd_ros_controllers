@@ -44,14 +44,14 @@ namespace ezw {
            public:
             /**
              * @brief Construct a new Diff Drive Controller object
-             * 
+             *
              * @param p_nh ROS node handle
              */
             explicit DiffDriveController(std::shared_ptr<ros::NodeHandle> &p_nh);
 
             /**
              * @brief Destroy the Diff Drive Controller object
-             * 
+             *
              */
             virtual ~DiffDriveController();
 
