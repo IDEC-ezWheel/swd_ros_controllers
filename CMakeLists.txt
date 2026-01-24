@@ -43,14 +43,11 @@ if(NOT CMAKE_C_FLAGS)
 endif(NOT CMAKE_C_FLAGS)
 
 # CASE OF CPP PROJECT
-set(CMAKE_CXX_STANDARD 11)
-
+set(CMAKE_CXX_STANDARD 17)
 if(NOT CMAKE_CXX_FLAGS)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wformat-security" CACHE STRING "C++11 compilation flags" FORCE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wformat-security" CACHE STRING "C++17 compilation flags" FORCE)
 endif(NOT CMAKE_CXX_FLAGS)
 
-# The code needs C++14 to work!
-set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -75,8 +72,18 @@ enable_testing()
 # Allow subdirectory test and config
 option(ENABLE_TESTS "Enable Tests" 1)
 
-# Allow Clang-tidy
-# set(CMAKE_CXX_CLANG_TIDY clang-tidy-12 --config-file=${CMAKE_SOURCE_DIR}/.clang-tidy --use-color --header-filter=${CMAKE_SOURCE_DIR}/include/)
+# Linter
+option(USE_CLANG_TIDY "Run clang-tidy during build" OFF)
+if(USE_CLANG_TIDY)
+  find_program(CLANG_TIDY_EXE NAMES clang-tidy)
+  if (CLANG_TIDY_EXE)   
+    execute_process(COMMAND ${CLANG_TIDY_EXE} --version OUTPUT_VARIABLE CLANG_TIDY_VERSION_RAW OUTPUT_STRIP_TRAILING_WHITESPACE)
+    string(REGEX REPLACE "\n.*" "" CLANG_TIDY_VERSION "${CLANG_TIDY_VERSION_RAW}")
+    message(STATUS "Found clang-tidy: ${CLANG_TIDY_EXE} (${CLANG_TIDY_VERSION})")
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE};--config-file=${CMAKE_SOURCE_DIR}/.clang-tidy;--use-color")
+  endif()
+endif()
+
 # set(DCMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # find_package(Doxygen)
@@ -167,10 +174,10 @@ CATKIN_INCLUDE_DIRS : ${catkin_INCLUDE_DIRS}
 -------------------")
 
 include_directories(
-  ${EZW_TYPES_INCLUDE_DIRS}
-  ${EZW_LOG_INCLUDE_DIRS}
-  ${EZW_SMC_SERVICE_CLIENT_INCLUDE_DIRS}
-  ${catkin_INCLUDE_DIRS}
+  SYSTEM ${EZW_TYPES_INCLUDE_DIRS}
+  SYSTEM ${EZW_LOG_INCLUDE_DIRS}
+  SYSTEM ${EZW_SMC_SERVICE_CLIENT_INCLUDE_DIRS}
+  SYSTEM ${catkin_INCLUDE_DIRS}
 )
 
 # Add library dirs. The case not configured will be empty
