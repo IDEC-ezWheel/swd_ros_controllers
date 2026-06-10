@@ -728,7 +728,7 @@ namespace ezw {
             }
 
             double _left_vel = 1.0 * (left_speed / m_l_motor_reduction / 60.0 * (2.0 * M_PI));
-            double _right_vel = 1.0 * (right_speed / m_l_motor_reduction / 60.0 * (2.0 * M_PI));
+            double _right_vel = 1.0 * (right_speed / m_r_motor_reduction / 60.0 * (2.0 * M_PI));
 
             double x = 0.5 * ((_left_vel + _right_vel) * m_left_wheel_diameter_m / (4 * m_baseline_m));
             double z = 1.0 * ((_right_vel - _left_vel) * m_left_wheel_diameter_m / (2 * m_baseline_m));
@@ -737,10 +737,10 @@ namespace ezw {
                 "Twist command (linear.x_requested, angular.z_requested, linear.x_real, angular.z_real); %f;%f;%f;%f; \
                     Calculated speeds (left_requested, right_requested, left_send, right_send); \
                     % d; % d; % d; % d; \
-                    Safety indicators (STO, SDIp, SLS); % d; % d; % d; ",
+                    Safety indicators (STO, SDIp, SLS_1, SLS_2); % d; % d; % d; % d; ",
                 p_cmd_vel->linear.x,
                 p_cmd_vel->angular.z, x, z, left_requested, right_requested, left, right,
-                (int)m_safety_msg.safe_torque_off, (int)m_safety_msg.safe_direction_indication_forward, (int)m_safety_msg.safety_limited_speed);
+                (int)m_safety_msg.safe_torque_off, (int)m_safety_msg.safe_direction_indication_forward, (int)m_safety_msg.safety_limited_speed_1, (int)m_safety_msg.safety_limited_speed_2);
 
 #endif
         }
@@ -1037,7 +1037,7 @@ namespace ezw {
             }
 
 #if VERBOSE_OUTPUT
-            ROS_INFO("STO: %d, SDI+: %d, SDI-: %d, SLS_1: %d, , SLS_2: %d", msg.safe_torque_off, msg.safe_direction_indication_forward, msg.safe_direction_indication_backward, msg.safety_limited_speed_1, msg.safety_limited_speed_2);
+            ROS_INFO("STO: %d, SDI+: %d, SDI-: %d, SLS_1: %d, SLS_2: %d", msg.safe_torque_off, msg.safe_direction_indication_forward, msg.safe_direction_indication_backward, msg.safety_limited_speed_1, msg.safety_limited_speed_2);
 #endif
 
             m_safety_msg_mtx.lock();
