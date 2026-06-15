@@ -1,3 +1,13 @@
+swd-ros-controllers (4.2.0) unstable; urgency=medium
+
+  * EZ-1377: Modified the using variable to calculate the velocity of right motor
+  * Fix clang-tidy detection
+  * DDM_24031: Update GitHub organisation name to IDEC-ezWheel
+  * Bump clang-format from 11 to 15
+  * Fix LICENSE file
+
+ -- Grégory Mermet <g.mermet@ez-wheel.com>  Wed, 17 Jan 2024 16:51:59 +0100
+
 swd-ros-controllers (4.1.0) unstable; urgency=medium
 
   * Fix the apt-key deprecation error
