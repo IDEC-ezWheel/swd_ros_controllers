@@ -1,3 +1,9 @@
+swd-ros-controllers (4.2.1) unstable; urgency=medium
+
+  * EZ-1387: Modified to check the status of safety function of each safety inputs and publish to safety topic
+
+ -- Grégory Mermet <gregory.mermet@idec.com>  Wed, 22 Jul 2026 12:49:37 +0000
+
 swd-ros-controllers (4.2.0) unstable; urgency=medium
 
   * EZ-1377: Modified the using variable to calculate the velocity of right motor
